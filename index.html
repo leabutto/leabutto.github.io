@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leandro Butto · Desarrollador Backend Java</title>
+<meta name="description" content="Leandro Butto, Analista en Sistemas y Licenciado en Informática. Desarrollador backend Java con Spring Boot, Spring Security y PostgreSQL. Santa Fe, Argentina.">
+<meta property="og:title" content="Leandro Butto · Desarrollador Backend Java">
+<meta property="og:description" content="Analista en Sistemas y Licenciado en Informática. Proyectos: Hola Pacha (tienda online) y Consultorio Odontológico (sistema de gestión).">
+<meta property="og:image" content="img/clinica-odontograma.jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F7F5; --surface:#FFFFFF; --ink:#16181D; --text:#3D424B; --muted:#6B717C;
+  --line:#E4E4E0; --accent:#1F5FD1; --accent-soft:#E8EFFC; --ok:#1E8A4C; --ok-soft:#E5F4EB;
+  --warn:#9A6200; --warn-soft:#FCF1DD;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  --radius:14px; --shadow:0 1px 2px rgba(16,24,40,.05),0 8px 24px rgba(16,24,40,.06);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#111317; --surface:#181B21; --ink:#F1F2F4; --text:#C5C9D1; --muted:#8B919C;
+    --line:#2A2E36; --accent:#6EA0FF; --accent-soft:#1B2740; --ok:#5CCB8A; --ok-soft:#15281E;
+    --warn:#E7B45A; --warn-soft:#2B2213; --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111317; --surface:#181B21; --ink:#F1F2F4; --text:#C5C9D1; --muted:#8B919C;
+  --line:#2A2E36; --accent:#6EA0FF; --accent-soft:#1B2740; --ok:#5CCB8A; --ok-soft:#15281E;
+  --warn:#E7B45A; --warn-soft:#2B2213; --shadow:none;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:var(--accent)}
+h1,h2,h3{color:var(--ink);line-height:1.2;margin:0}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:1.5rem;height:60px}
+.brand{font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+.nav ul{display:flex;gap:1.4rem;list-style:none;margin:0 0 0 auto;padding:0}
+.nav ul a{color:var(--muted);text-decoration:none;font-size:.92rem;font-weight:500}
+.nav ul a:hover{color:var(--ink)}
+
+/* Hero */
+.hero{padding:88px 0 64px}
+.eyebrow{font:500 .8rem var(--mono);color:var(--accent);letter-spacing:.02em;margin:0 0 1rem}
+.hero h1{font-size:clamp(2.3rem,5.5vw,3.6rem);letter-spacing:-.03em;font-weight:700}
+.hero .role{font-size:clamp(1.2rem,2.6vw,1.55rem);color:var(--text);margin:.6rem 0 1.4rem;font-weight:500}
+.titles{display:flex;flex-wrap:wrap;gap:.6rem;margin:0 0 1.6rem;padding:0;list-style:none}
+.titles li{display:flex;align-items:center;gap:.5rem;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:.4rem .9rem;font-weight:600;color:var(--ink);font-size:.95rem}
+.titles svg{color:var(--accent);flex:none}
+.hero p.lead{max-width:640px;font-size:1.08rem;margin:0 0 2rem}
+.ctas{display:flex;flex-wrap:wrap;gap:.75rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.2rem;border-radius:10px;font-weight:600;text-decoration:none;font-size:.95rem;border:1px solid transparent;transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn.primary{background:var(--accent);color:#fff}
+:root[data-theme="dark"] .btn.primary{color:#0B1220}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.primary{color:#0B1220}}
+.btn.ghost{background:var(--surface);border-color:var(--line);color:var(--ink)}
+.meta{display:flex;flex-wrap:wrap;gap:1.4rem;margin-top:2rem;color:var(--muted);font-size:.92rem}
+.meta span{display:flex;align-items:center;gap:.4rem}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px var(--ok-soft)}
+
+/* Sections */
+section{padding:56px 0}
+.sec-head{margin-bottom:2rem}
+.sec-head .eyebrow{margin-bottom:.5rem}
+.sec-head h2{font-size:clamp(1.6rem,3.4vw,2.1rem);letter-spacing:-.02em}
+.sec-head p{margin:.6rem 0 0;color:var(--muted);max-width:620px}
+
+/* About */
+.about{display:grid;grid-template-columns:1.4fr 1fr;gap:2rem;align-items:start}
+.about p{margin:0 0 1rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.facts{padding:1.4rem 1.5rem}
+.facts dl{margin:0;display:grid;gap:1rem}
+.facts dt{font:500 .75rem var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.facts dd{margin:.15rem 0 0;color:var(--ink);font-weight:600}
+
+/* Projects */
+.project{overflow:hidden;margin-bottom:2.5rem}
+.project-top{display:grid;grid-template-columns:1.25fr 1fr;gap:0}
+.shot-main{display:block;width:100%;padding:0;border:0;border-right:1px solid var(--line);background:var(--line);cursor:zoom-in;overflow:hidden}
+.shot-main img{width:100%;height:100%;min-height:100%;aspect-ratio:16/10;object-fit:cover;object-position:top left;transition:transform .4s}
+.shot-main:hover img{transform:scale(1.02)}
+.project-body{padding:1.8rem 1.8rem 1.6rem}
+.status{display:inline-flex;align-items:center;gap:.4rem;font:500 .75rem var(--mono);padding:.25rem .6rem;border-radius:6px;margin-bottom:.9rem}
+.status.dev{background:var(--warn-soft);color:var(--warn)}
+.status.ok{background:var(--ok-soft);color:var(--ok)}
+.project h3{font-size:1.55rem;letter-spacing:-.02em}
+.project .kind{color:var(--muted);margin:.25rem 0 1rem;font-weight:500}
+.project .problem{margin:0 0 1.2rem}
+.label{font:500 .72rem var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin:0 0 .5rem}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;list-style:none;margin:0 0 1.4rem;padding:0}
+.chips li{font-size:.82rem;font-weight:500;padding:.25rem .6rem;border-radius:6px;background:var(--accent-soft);color:var(--accent)}
+.links{display:flex;flex-wrap:wrap;gap:.6rem}
+.links .btn{padding:.55rem .95rem;font-size:.88rem}
+.project-detail{display:grid;grid-template-columns:1.25fr 1fr;gap:2rem;padding:1.8rem;border-top:1px solid var(--line)}
+.features{list-style:none;margin:0;padding:0;display:grid;gap:.65rem}
+.features li{position:relative;padding-left:1.6rem}
+.features li::before{content:"";position:absolute;left:0;top:.55em;width:.9rem;height:.5rem;border-left:2px solid var(--ok);border-bottom:2px solid var(--ok);transform:rotate(-45deg) translateY(-30%)}
+.features b{color:var(--ink);font-weight:600}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;align-content:start}
+.thumbs button{padding:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#0E1013;cursor:zoom-in;transition:transform .15s,border-color .15s}
+.thumbs button:hover{transform:translateY(-2px);border-color:var(--accent)}
+.thumbs img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top}
+.thumbs .cap{grid-column:1/-1;font-size:.85rem;color:var(--muted);margin:.2rem 0 0}
+
+/* Skills */
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem}
+.skill{padding:1.3rem 1.4rem}
+.skill h3{font-size:1rem;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.skill h3 svg{color:var(--accent)}
+.skill ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.4rem}
+.skill li{font-size:.86rem;padding:.25rem .6rem;border-radius:6px;border:1px solid var(--line);color:var(--ink)}
+.skill li.learning{border-style:dashed;color:var(--muted)}
+.legend{margin-top:1rem;font-size:.85rem;color:var(--muted)}
+.legend span{display:inline-block;border:1px dashed var(--muted);border-radius:4px;padding:0 .4rem;margin-right:.3rem}
+
+/* Education */
+.edu{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+.edu .card{padding:1.4rem 1.5rem;display:flex;gap:1rem;align-items:flex-start}
+.edu .ico{width:44px;height:44px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;flex:none}
+.edu h3{font-size:1.1rem}
+.edu p{margin:.2rem 0 0;color:var(--muted);font-size:.92rem}
+
+/* Contact */
+.contact{text-align:center;padding:3rem 1.5rem}
+.contact h2{font-size:clamp(1.6rem,3.4vw,2.1rem);letter-spacing:-.02em}
+.contact p{color:var(--muted);margin:.7rem auto 1.8rem;max-width:520px}
+.contact .ctas{justify-content:center}
+footer{padding:2rem 0 3rem;text-align:center;color:var(--muted);font-size:.85rem}
+
+/* Lightbox */
+dialog{border:0;padding:0;background:transparent;max-width:min(1200px,94vw);max-height:92vh}
+dialog::backdrop{background:rgba(8,10,14,.85)}
+dialog img{max-height:84vh;width:auto;margin:0 auto;border-radius:10px}
+dialog p{color:#E6E8EC;text-align:center;margin:.7rem 0 0;font-size:.95rem}
+dialog .close{position:fixed;top:14px;right:18px;width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,255,255,.12);color:#fff;font-size:24px;cursor:pointer}
+
+@media (max-width:860px){
+  .nav ul{display:none}
+  .hero{padding:56px 0 40px}
+  .about,.project-top,.project-detail{grid-template-columns:1fr}
+  .shot-main{border-right:0;border-bottom:1px solid var(--line)}
+  .project-body,.project-detail{padding:1.4rem}
+  section{padding:40px 0}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.thumbs button{transition:none}}
+@media print{.nav,.ctas,.links,dialog{display:none}body{background:#fff}.card{box-shadow:none}}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Principal">
+  <div class="wrap">
+    <a class="brand" href="#inicio">Leandro Butto</a>
+    <ul>
+      <li><a href="#sobre-mi">Sobre mí</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#tecnologias">Tecnologías</a></li>
+      <li><a href="#formacion">Formación</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="inicio">
+  <!-- ===== Encabezado ===== -->
+  <header class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Hola, soy</p>
+      <h1>Leandro Butto</h1>
+      <p class="role">Desarrollador Backend Java</p>
+      <ul class="titles">
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>Analista en Sistemas</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>Licenciado en Informática</li>
+      </ul>
+      <p class="lead">Desarrollo aplicaciones web completas con <strong>Java, Spring Boot y PostgreSQL</strong>: desde el diseño de la base de datos y la seguridad, hasta la puesta en marcha. Hoy tengo dos sistemas pensados para clientes reales: una tienda online y un sistema de gestión para consultorios odontológicos.</p>
+      <div class="ctas">
+        <a class="btn primary" href="#proyectos">Ver proyectos</a>
+        <a class="btn ghost" href="cv-leandro-butto.pdf" download>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 21h16"/></svg>Descargar CV</a>
+        <a class="btn ghost" href="mailto:leandrobutto@gmail.com">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>Escribirme</a>
+        <a class="btn ghost" href="https://github.com/leabutto" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>GitHub</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/leandro-b-203361362" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>LinkedIn</a>
+      </div>
+      <div class="meta">
+        <span><span class="dot" aria-hidden="true"></span>Disponible para entrevistas</span>
+        <span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg>Santa Fe, Argentina · Trabajo remoto</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Sobre mí ===== -->
+  <section id="sobre-mi">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">01 · Sobre mí</p>
+        <h2>Sistemas que alguien usa de verdad</h2>
+      </div>
+      <div class="about">
+        <div>
+          <p>Soy <strong>Analista en Sistemas</strong> y <strong>Licenciado en Informática</strong>. Me dedico al desarrollo backend con Java y trabajo como freelance construyendo sistemas a medida para clientes reales.</p>
+          <p>Me gusta partir de un problema concreto: una emprendedora que necesita vender online sin depender de un programador, o un consultorio que todavía lleva las fichas en papel. A partir de ahí diseño el modelo de datos, la seguridad, las reglas de negocio y la interfaz.</p>
+          <p>Busco un puesto <strong>remoto</strong> como <strong>desarrollador backend Java</strong>, en un equipo donde pueda aportar en APIs REST, seguridad y bases de datos, y seguir aprendiendo.</p>
+        </div>
+        <div class="card facts">
+          <dl>
+            <div><dt>Rol buscado</dt><dd>Desarrollador Backend Java · Remoto</dd></div>
+            <div><dt>Especialidad</dt><dd>Spring Boot · Spring Security · PostgreSQL</dd></div>
+            <div><dt>Títulos</dt><dd>Analista en Sistemas<br>Licenciado en Informática</dd></div>
+            <div><dt>Ubicación</dt><dd>Santa Fe, Argentina</dd></div>
+            <div><dt>Idiomas</dt><dd>Español nativo · Inglés intermedio (B1)</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Proyectos ===== -->
+  <section id="proyectos">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">02 · Proyectos</p>
+        <h2>Lo que construí</h2>
+        <p>Dos aplicaciones completas, con backend, base de datos, seguridad e interfaz. Tocá las capturas para verlas en grande.</p>
+      </div>
+
+      <!-- Hola Pacha -->
+      <article class="card project" aria-labelledby="p1">
+        <div class="project-top">
+          <button class="shot-main" data-img="img/pacha-tienda.jpeg" data-cap="Hola Pacha · Catálogo con filtros por categoría, buscador y orden" aria-label="Ampliar captura del catálogo de Hola Pacha">
+            <img src="img/pacha-tienda.jpeg" alt="Catálogo de la tienda Hola Pacha con productos de decoración" >
+          </button>
+          <div class="project-body">
+            <span class="status dev">● En desarrollo</span>
+            <h3 id="p1">Hola Pacha</h3>
+            <p class="kind">Tienda online · Cliente real</p>
+            <p class="problem">E-commerce para un emprendimiento de decoración y accesorios hechos a mano. La dueña carga productos, arma ofertas y gestiona pedidos desde su celular, sin depender de un programador.</p>
+            <p class="label">Tecnologías</p>
+            <ul class="chips">
+              <li>Java 21</li><li>Spring Boot</li><li>Spring Security + JWT</li><li>Spring Data JPA</li><li>PostgreSQL</li><li>Flyway</li><li>API REST</li><li>React</li><li>Mercado Pago</li>
+            </ul>
+            <div class="links">
+              <a class="btn ghost" href="https://github.com/leabutto/tienda-deco" target="_blank" rel="noopener">Ver código</a>
+            </div>
+          </div>
+        </div>
+        <div class="project-detail">
+          <div>
+            <p class="label">Qué hace</p>
+            <ul class="features">
+              <li><b>Catálogo y carrito:</b> buscador, filtros por categoría, ficha de producto con galería y control de stock.</li>
+              <li><b>Checkout con pago online</b> integrado a Mercado Pago (API REST y webhook para confirmar el pago).</li>
+              <li><b>Cotización de envíos en tiempo real</b> con OCA y Andreani, y mapa de sucursales cercanas para retirar.</li>
+              <li><b>Panel de administración:</b> pedidos, productos con fotos, categorías, combos con descuento y ficha de cada cliente.</li>
+              <li><b>Seguridad:</b> roles ADMIN y CLIENTE, autenticación con JWT y recuperación de contraseña por email.</li>
+              <li><b>Base de datos versionada</b> con migraciones Flyway.</li>
+            </ul>
+          </div>
+          <div class="thumbs">
+            <button data-img="img/pacha-inicio.jpeg" data-cap="Hola Pacha · Portada de la tienda" aria-label="Ampliar portada"><img src="img/pacha-inicio.jpeg" alt="Portada de Hola Pacha" ></button>
+            <button data-img="img/pacha-producto.jpeg" data-cap="Hola Pacha · Ficha de producto con stock y carrito" aria-label="Ampliar ficha de producto"><img src="img/pacha-producto.jpeg" alt="Ficha de producto" ></button>
+            <button data-img="img/pacha-movil.jpeg" data-cap="Hola Pacha · Diseño adaptado a celular" aria-label="Ampliar vista en celular"><img src="img/pacha-movil.jpeg" alt="Tienda vista en un celular" ></button>
+            <p class="cap">Portada · Producto · Celular</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Consultorio -->
+      <article class="card project" aria-labelledby="p2">
+        <div class="project-top">
+          <button class="shot-main" data-img="img/clinica-odontograma.jpeg" data-cap="Consultorio · Odontograma digital según normas de obras sociales" aria-label="Ampliar captura del odontograma">
+            <img src="img/clinica-odontograma.jpeg" alt="Odontograma digital con prestaciones marcadas en azul y rojo" >
+          </button>
+          <div class="project-body">
+            <span class="status dev">● Funcional · en evolución</span>
+            <h3 id="p2">Consultorio Odontológico</h3>
+            <p class="kind">Sistema de gestión · SaaS multi-consultorio</p>
+            <p class="problem">Sistema web para odontólogos y secretarias: pacientes, turnos, obras sociales e historia clínica con odontograma digital. Nació con Servlets y JSP y lo migré a Spring Boot para que varios consultorios lo usen, cada uno con sus propios datos.</p>
+            <p class="label">Tecnologías</p>
+            <ul class="chips">
+              <li>Java 17</li><li>Spring Boot</li><li>Spring Security</li><li>Spring Data JPA</li><li>Thymeleaf</li><li>PostgreSQL</li><li>Flyway</li><li>Docker</li>
+            </ul>
+            <div class="links">
+              <a class="btn ghost" href="https://github.com/leabutto/ProyectoClinica" target="_blank" rel="noopener">Ver código</a>
+            </div>
+          </div>
+        </div>
+        <div class="project-detail">
+          <div>
+            <p class="label">Qué hace</p>
+            <ul class="features">
+              <li><b>Multi-consultorio:</b> cada clínica ve solo sus datos; el filtro se aplica en cada consulta.</li>
+              <li><b>Roles jerárquicos:</b> Administrador, Odontólogo y Secretaria, con contraseñas cifradas (BCrypt).</li>
+              <li><b>Odontograma digital</b> con notación FDI y colores según las normas de las obras sociales argentinas.</li>
+              <li><b>Ficha imprimible para obra social</b>, fotos clínicas por paciente y agenda de turnos.</li>
+              <li><b>Migración</b> de una versión anterior en Servlets/JSP a Spring Boot.</li>
+              <li><b>Listo para producción:</b> Docker Compose con PostgreSQL, HTTPS automático y backups diarios.</li>
+            </ul>
+          </div>
+          <div class="thumbs">
+            <button data-img="img/clinica-login.jpeg" data-cap="Consultorio · Pantalla de ingreso" aria-label="Ampliar pantalla de ingreso"><img src="img/clinica-login.jpeg" alt="Pantalla de ingreso del sistema" ></button>
+            <button data-img="img/clinica-paciente.jpeg" data-cap="Consultorio · Ficha del paciente con obra social y alergias" aria-label="Ampliar ficha del paciente"><img src="img/clinica-paciente.jpeg" alt="Ficha de un paciente" ></button>
+            <button data-img="img/clinica-odontograma.jpeg" data-cap="Consultorio · Odontograma digital" aria-label="Ampliar odontograma"><img src="img/clinica-odontograma.jpeg" alt="Odontograma" ></button>
+            <p class="cap">Ingreso · Ficha del paciente · Odontograma</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== Tecnologías ===== -->
+  <section id="tecnologias">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">03 · Tecnologías</p>
+        <h2>Con qué trabajo</h2>
+      </div>
+      <div class="skills">
+        <div class="card skill">
+          <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg>Lenguajes</h3>
+          <ul><li>Java</li><li>SQL</li><li>HTML y CSS</li><li>JavaScript</li></ul>
+        </div>
+        <div class="card skill">
+          <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg>Backend</h3>
+          <ul><li>Spring Boot</li><li>Spring Security</li><li>JWT</li><li>Spring Data JPA</li><li>Hibernate</li><li>APIs REST</li><li>Thymeleaf</li><li>Servlets y JSP</li></ul>
+        </div>
+        <div class="card skill">
+          <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"/><path d="M3 12c0 1.7 4 3 9 3s9-1.3 9-3"/></svg>Bases de datos</h3>
+          <ul><li>PostgreSQL</li><li>Modelado relacional</li><li>MySQL</li><li>Flyway (migraciones)</li><li>H2</li></ul>
+        </div>
+        <div class="card skill">
+          <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4 2.5-2.5Z"/></svg>Herramientas</h3>
+          <ul><li>Maven</li><li>Git y GitHub</li><li>Postman</li><li>IntelliJ IDEA</li><li>NetBeans</li><li class="learning">Docker</li></ul>
+        </div>
+      </div>
+      <p class="legend"><span>Docker</span> borde punteado = lo estoy aprendiendo (ya lo usé para el despliegue del consultorio).</p>
+    </div>
+  </section>
+
+  <!-- ===== Formación ===== -->
+  <section id="formacion">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">04 · Formación</p>
+        <h2>Estudios</h2>
+      </div>
+      <div class="edu">
+        <div class="card">
+          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></div>
+          <div><h3>Licenciatura en Informática</h3><p>Universidad Siglo 21 · 2026</p></div>
+        </div>
+        <div class="card">
+          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></div>
+          <div><h3>Analista Universitario en Sistemas</h3><p>Universidad Siglo 21 · 2025</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Contacto ===== -->
+  <section id="contacto">
+    <div class="wrap">
+      <div class="card contact">
+        <p class="eyebrow">05 · Contacto</p>
+        <h2>¿Hablamos?</h2>
+        <p>Estoy disponible para entrevistas. Escribime y te respondo dentro de las 24 horas.</p>
+        <div class="ctas">
+          <a class="btn primary" href="mailto:leandrobutto@gmail.com">leandrobutto@gmail.com</a>
+          <a class="btn ghost" href="https://github.com/leabutto" target="_blank" rel="noopener">github.com/leabutto</a>
+          <a class="btn ghost" href="https://www.linkedin.com/in/leandro-b-203361362" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>© 2026 Leandro Butto · Santa Fe, Argentina</footer>
+
+<dialog id="lightbox" aria-label="Captura ampliada">
+  <button class="close" aria-label="Cerrar">×</button>
+  <img alt="">
+  <p></p>
+</dialog>
+
+<script>
+const box = document.getElementById("lightbox");
+const boxImg = box.querySelector("img"), boxCap = box.querySelector("p");
+document.querySelectorAll("[data-img]").forEach(b => b.addEventListener("click", () => {
+  boxImg.src = b.dataset.img; boxImg.alt = b.dataset.cap; boxCap.textContent = b.dataset.cap;
+  box.showModal();
+}));
+box.addEventListener("click", e => { if (e.target !== boxImg) box.close(); });
+</script>
+</body>
+</html>
