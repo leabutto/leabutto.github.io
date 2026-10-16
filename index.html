@@ -6,8 +6,8 @@
 <title>Leandro Butto · Desarrollador Backend Java</title>
 <meta name="description" content="Leandro Butto, Analista en Sistemas y Licenciado en Informática. Desarrollador backend Java con Spring Boot, Spring Security y PostgreSQL. Santa Fe, Argentina.">
 <meta property="og:title" content="Leandro Butto · Desarrollador Backend Java">
-<meta property="og:description" content="Analista en Sistemas y Licenciado en Informática. Proyectos: Hola Pacha (tienda online) y Consultorio Odontológico (sistema de gestión).">
-<meta property="og:image" content="img/clinica-odontograma.jpeg">
+<meta property="og:description" content="Analista en Sistemas y Licenciado en Informática. Proyectos: ComoVivo (finanzas personales y de pareja), Hola Pacha (tienda online) y Consultorio Odontológico (sistema de gestión).">
+<meta property="og:image" content="img/comovivo-portada.jpeg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
@@ -91,6 +91,8 @@ section{padding:56px 0}
 .shot-main{display:block;width:100%;padding:0;border:0;border-right:1px solid var(--line);background:var(--line);cursor:zoom-in;overflow:hidden}
 .shot-main img{width:100%;height:100%;min-height:100%;aspect-ratio:16/10;object-fit:cover;object-position:top left;transition:transform .4s}
 .shot-main:hover img{transform:scale(1.02)}
+.shot-main.fit{background:#0E6A92}
+.shot-main.fit img{object-fit:contain;object-position:center}
 .project-body{padding:1.8rem 1.8rem 1.6rem}
 .status{display:inline-flex;align-items:center;gap:.4rem;font:500 .75rem var(--mono);padding:.25rem .6rem;border-radius:6px;margin-bottom:.9rem}
 .status.dev{background:var(--warn-soft);color:var(--warn)}
@@ -114,6 +116,7 @@ section{padding:56px 0}
 .thumbs button{padding:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#0E1013;cursor:zoom-in;transition:transform .15s,border-color .15s}
 .thumbs button:hover{transform:translateY(-2px);border-color:var(--accent)}
 .thumbs img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top}
+.thumbs.phone img{aspect-ratio:9/16}
 .thumbs .cap{grid-column:1/-1;font-size:.85rem;color:var(--muted);margin:.2rem 0 0}
 
 /* Skills */
@@ -186,7 +189,7 @@ dialog .close{position:fixed;top:14px;right:18px;width:42px;height:42px;border-r
         <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>Analista en Sistemas</li>
         <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>Licenciado en Informática</li>
       </ul>
-      <p class="lead">Desarrollo aplicaciones web completas con <strong>Java, Spring Boot y PostgreSQL</strong>: desde el diseño de la base de datos y la seguridad, hasta la puesta en marcha. Hoy tengo dos sistemas pensados para clientes reales: una tienda online y un sistema de gestión para consultorios odontológicos.</p>
+      <p class="lead">Desarrollo aplicaciones web completas con <strong>Java, Spring Boot y PostgreSQL</strong>: desde el diseño de la base de datos y la seguridad, hasta la puesta en marcha. Hoy tengo una app de finanzas personales en producción, una tienda online y un sistema de gestión para consultorios odontológicos.</p>
       <div class="ctas">
         <a class="btn primary" href="#proyectos">Ver proyectos</a>
         <a class="btn ghost" href="cv-leandro-butto.pdf" download>
@@ -238,8 +241,52 @@ dialog .close{position:fixed;top:14px;right:18px;width:42px;height:42px;border-r
       <div class="sec-head">
         <p class="eyebrow">02 · Proyectos</p>
         <h2>Lo que construí</h2>
-        <p>Dos aplicaciones completas, con backend, base de datos, seguridad e interfaz. Tocá las capturas para verlas en grande.</p>
+        <p>Tres aplicaciones completas, con backend, base de datos, seguridad e interfaz. Tocá las capturas para verlas en grande.</p>
       </div>
+
+      <!-- ComoVivo -->
+      <article class="card project" aria-labelledby="p0">
+        <div class="project-top">
+          <button class="shot-main fit" data-img="img/comovivo-portada.jpeg" data-cap="ComoVivo · Carga rápida, resumen del mes y balance de pareja" aria-label="Ampliar capturas de ComoVivo">
+            <img src="img/comovivo-portada.jpeg" alt="Tres pantallas de ComoVivo en celulares: carga de un gasto en cuotas, cuánto te queda por día y el balance entre los dos">
+          </button>
+          <div class="project-body">
+            <span class="status ok">● En producción</span>
+            <h3 id="p0">ComoVivo</h3>
+            <p class="kind">Finanzas personales y de pareja · App web instalable</p>
+            <p class="problem">App para ordenar la plata del mes en Argentina, solo o de a dos: sueldos, gastos fijos, tarjetas con cuotas y ahorros. Responde lo que todos se preguntan a mitad de mes: cuánto me queda por día y quién le debe a quién.</p>
+            <p class="label">Tecnologías</p>
+            <ul class="chips">
+              <li>Java 17</li><li>Spring Boot 4</li><li>Spring Security + JWT</li><li>Spring Data JPA</li><li>PostgreSQL</li><li>Flyway</li><li>API REST</li><li>React 19</li><li>TypeScript</li><li>Vite</li><li>Tailwind CSS</li><li>TanStack Query</li><li>PWA</li><li>Docker</li><li>Render + Neon</li>
+            </ul>
+            <div class="links">
+              <a class="btn primary" href="https://comovivo.app" target="_blank" rel="noopener">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>Probar la app</a>
+              <p class="private"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>El código es privado. Lo muestro con gusto en una entrevista.</p>
+            </div>
+          </div>
+        </div>
+        <div class="project-detail">
+          <div>
+            <p class="label">Qué hace</p>
+            <ul class="features">
+              <li><b>Cuánto te queda por día</b> hasta fin de mes, descontando fijos, cuotas que vencen y lo que apartaste para ahorrar.</li>
+              <li><b>Tarjetas con cierre y vencimiento:</b> cada compra en cuotas cae en el resumen que corresponde, con vista previa al cargarla.</li>
+              <li><b>Gastos en pareja:</b> reparto igual, proporcional al sueldo o por categoría; saldo acumulado entre los dos y transferencias para saldar.</li>
+              <li><b>Ahorros y metas</b> en pesos y dólares, con cotización del día y cuánto poner por mes para llegar.</li>
+              <li><b>Se instala en el celular (PWA)</b> y deja cargar gastos sin señal: se suben solos al volver la conexión, sin duplicarse.</li>
+              <li><b>Seguridad:</b> registro con email confirmado, JWT con refresh tokens rotativos y privacidad de los gastos personales dentro de la pareja.</li>
+              <li><b>En producción</b> con Docker en Render y PostgreSQL en Neon; 76 tests automáticos de backend y frontend.</li>
+            </ul>
+          </div>
+          <div class="thumbs phone">
+            <button data-img="img/comovivo-ingreso.jpeg" data-cap="ComoVivo · Pantalla de ingreso" aria-label="Ampliar pantalla de ingreso"><img src="img/comovivo-ingreso.jpeg" alt="Pantalla de ingreso de ComoVivo"></button>
+            <button data-img="img/comovivo-inicio.jpeg" data-cap="ComoVivo · Cuánto te queda por día y en qué se va el sueldo" aria-label="Ampliar pantalla de inicio"><img src="img/comovivo-inicio.jpeg" alt="Inicio de ComoVivo con el disponible por día"></button>
+            <button data-img="img/comovivo-ahorros.jpeg" data-cap="ComoVivo · Ahorros y metas de a dos" aria-label="Ampliar ahorros y metas"><img src="img/comovivo-ahorros.jpeg" alt="Ahorros con una meta de vacaciones al 36%"></button>
+            <p class="cap">Ingreso · Inicio · Ahorros y metas (datos de ejemplo)</p>
+          </div>
+        </div>
+      </article>
 
       <!-- Hola Pacha -->
       <article class="card project" aria-labelledby="p1">
@@ -335,7 +382,7 @@ dialog .close{position:fixed;top:14px;right:18px;width:42px;height:42px;border-r
       <div class="skills">
         <div class="card skill">
           <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg>Lenguajes</h3>
-          <ul><li>Java</li><li>SQL</li><li>HTML y CSS</li><li>JavaScript</li></ul>
+          <ul><li>Java</li><li>SQL</li><li>HTML y CSS</li><li>JavaScript</li><li>TypeScript</li></ul>
         </div>
         <div class="card skill">
           <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg>Backend</h3>
