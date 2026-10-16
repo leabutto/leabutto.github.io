@@ -8,12 +8,15 @@
 <meta property="og:title" content="Leandro Butto · Desarrollador Backend Java">
 <meta property="og:description" content="Analista en Sistemas y Licenciado en Informática. Proyectos: ComoVivo (finanzas personales y de pareja), Hola Pacha (tienda online) y Consultorio Odontológico (sistema de gestión).">
 <meta property="og:image" content="img/comovivo-portada.jpeg">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%231F5FD1'/%3E%3Cstop offset='1' stop-color='%2314B8C4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg fill='none' stroke='url(%23g)' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke-width='20' d='M150 20H68A48 48 0 0 0 20 68V172A48 48 0 0 0 68 220H172A48 48 0 0 0 220 172V100'/%3E%3Cpath stroke-width='26' d='M70 72V164H112M112 164V72H138A22 22 0 0 1 138 116H112M112 116H144A24 24 0 0 1 144 164H112'/%3E%3C/g%3E%3Ccircle cx='196' cy='44' r='13' fill='%2314B8C4'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <script>
-// Aplica el modo elegido antes de pintar, para que no parpadee.
-try { const t = localStorage.getItem("theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch {}
+// Aplica el modo elegido antes de pintar, para que no parpadee. Sin elección, arranca en oscuro.
+let savedTheme = null;
+try { savedTheme = localStorage.getItem("theme"); } catch {}
+document.documentElement.dataset.theme = savedTheme === "light" ? "light" : "dark";
 </script>
 <style>
 :root{
@@ -21,7 +24,7 @@ try { const t = localStorage.getItem("theme"); if (t === "light" || t === "dark"
   --line:#E4E4E0; --accent:#1F5FD1; --accent-soft:#E8EFFC; --ok:#1E8A4C; --ok-soft:#E5F4EB;
   --warn:#9A6200; --warn-soft:#FCF1DD;
   --sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  --mono:"Space Mono",ui-monospace,Consolas,monospace;
   --radius:14px; --shadow:0 1px 2px rgba(16,24,40,.05),0 8px 24px rgba(16,24,40,.06);
 }
 @media (prefers-color-scheme:dark){
@@ -41,16 +44,16 @@ html{scroll-behavior:smooth;scroll-padding-top:72px}
 body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
 a{color:var(--accent)}
-h1,h2,h3{color:var(--ink);line-height:1.2;margin:0}
+h1,h2,h3{color:var(--ink);line-height:1.2;margin:0;font-family:var(--mono)}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
 .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
 
 /* Nav */
 .nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .nav .wrap{display:flex;align-items:center;gap:1.5rem;height:60px}
-.brand{font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+.brand{font:700 1rem var(--mono);color:var(--ink);text-decoration:none;letter-spacing:-.02em}
 .nav ul{display:flex;gap:1.4rem;list-style:none;margin:0 0 0 auto;padding:0}
-.nav ul a{color:var(--muted);text-decoration:none;font-size:.92rem;font-weight:500}
+.nav ul a{color:var(--muted);text-decoration:none;font:500 .88rem var(--mono)}
 .nav ul a:hover{color:var(--ink)}
 .theme-toggle{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;flex:none}
 .theme-toggle:hover{border-color:var(--accent);color:var(--accent)}
@@ -60,8 +63,40 @@ h1,h2,h3{color:var(--ink);line-height:1.2;margin:0}
 
 /* Hero */
 .hero{padding:88px 0 64px}
+.hero .wrap{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2rem}
+.hero .ctas{gap:.6rem}
+.hero .btn{padding:.75rem 1rem}
+
+/* Logo LB */
+:root{--logo-a:#1F5FD1;--logo-b:#14B8C4}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--logo-a:#6EA0FF;--logo-b:#5EEAD4}}
+:root[data-theme="dark"]{--logo-a:#6EA0FF;--logo-b:#5EEAD4}
+.lb .stop-a{stop-color:var(--logo-a)}
+.lb .stop-b{stop-color:var(--logo-b)}
+.lb path{fill:none;stroke:url(#lb-grad);stroke-linecap:round;stroke-linejoin:round}
+.lb-frame{stroke-width:14}
+.lb-l,.lb-b{stroke-width:18}
+.lb-dot{fill:var(--logo-b)}
+.hero-logo{display:grid;justify-items:center;gap:1.2rem}
+.hero-logo .lb{width:300px;height:auto;overflow:visible;animation:lb-float 6s ease-in-out 2.2s infinite}
+.hero-logo .lb path{stroke-dasharray:1;stroke-dashoffset:1;animation:lb-draw 1.1s cubic-bezier(.65,0,.35,1) forwards}
+.hero-logo .lb-l{animation-delay:.6s!important}
+.hero-logo .lb-b{animation-delay:.9s!important;animation-duration:1.3s!important}
+.hero-logo .lb-dot{transform-box:fill-box;transform-origin:center;transform:scale(0);animation:lb-pop .5s cubic-bezier(.34,1.56,.64,1) 1.8s forwards}
+.lb-name{margin:0;font:500 .82rem var(--mono);text-transform:uppercase;letter-spacing:.55em;padding-left:.55em;color:var(--muted);opacity:0;animation:lb-fade .8s ease 1.9s forwards}
+@keyframes lb-draw{to{stroke-dashoffset:0}}
+@keyframes lb-pop{to{transform:scale(1)}}
+@keyframes lb-fade{from{opacity:0;letter-spacing:1em}to{opacity:1}}
+@keyframes lb-float{50%{transform:translateY(-12px)}}
+.brand{display:inline-flex;align-items:center;gap:.6rem}
+.brand .lb{width:30px;height:30px}
+.brand .lb .lb-frame{stroke-width:18}
+.brand .lb .lb-l,.brand .lb .lb-b{stroke-width:22}
 .eyebrow{font:500 .8rem var(--mono);color:var(--accent);letter-spacing:.02em;margin:0 0 1rem}
-.hero h1{font-size:clamp(2.3rem,5.5vw,3.6rem);letter-spacing:-.03em;font-weight:700}
+.eyebrow.prompt{color:var(--logo-b);font-size:.95rem}
+.hero h1{font-size:clamp(2.1rem,5vw,3.3rem);letter-spacing:-.03em;font-weight:700}
+.hero h1::after{content:"_";color:var(--accent);margin-left:.05em;animation:cursor-blink 1.1s steps(1) infinite}
+@keyframes cursor-blink{50%{opacity:0}}
 .hero .role{font-size:clamp(1.2rem,2.6vw,1.55rem);color:var(--text);margin:.6rem 0 1.4rem;font-weight:500}
 .titles{display:flex;flex-wrap:wrap;gap:.6rem;margin:0 0 1.6rem;padding:0;list-style:none}
 .titles li{display:flex;align-items:center;gap:.5rem;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:.4rem .9rem;font-weight:600;color:var(--ink);font-size:.95rem}
@@ -175,6 +210,8 @@ dialog .close{position:fixed;top:14px;right:18px;width:42px;height:42px;border-r
 @media (max-width:860px){
   .nav ul{display:none}
   .theme-toggle{margin-left:auto}
+  .hero .wrap{grid-template-columns:1fr}
+  .hero-logo{display:none}
   .hero{padding:56px 0 40px}
   .about,.project-top,.project-detail,.contact{grid-template-columns:1fr}
   .contact{padding:1.6rem 1.4rem;gap:1.8rem}
@@ -183,7 +220,8 @@ dialog .close{position:fixed;top:14px;right:18px;width:42px;height:42px;border-r
   .project-body,.project-detail{padding:1.4rem}
   section{padding:40px 0}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.thumbs button{transition:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.thumbs button{transition:none}
+  .hero h1::after,.hero-logo .lb,.hero-logo .lb path,.hero-logo .lb-dot,.lb-name{animation:none!important;stroke-dashoffset:0;transform:none;opacity:1}}
 @media print{.nav,.ctas,.links,dialog{display:none}body{background:#fff}.card{box-shadow:none}}
 </style>
 </head>
@@ -191,7 +229,18 @@ dialog .close{position:fixed;top:14px;right:18px;width:42px;height:42px;border-r
 
 <nav class="nav" aria-label="Principal">
   <div class="wrap">
-    <a class="brand" href="#inicio">Leandro Butto</a>
+    <a class="brand" href="#inicio">
+      <svg class="lb" viewBox="0 0 240 240" aria-hidden="true">
+        <defs>
+          <linearGradient id="lb-grad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" class="stop-a"/><stop offset="1" class="stop-b"/>
+          </linearGradient>
+        </defs>
+        <path class="lb-frame" d="M150 20H68A48 48 0 0 0 20 68V172A48 48 0 0 0 68 220H172A48 48 0 0 0 220 172V100"/>
+        <path class="lb-l" d="M70 72V164H112"/>
+        <path class="lb-b" d="M112 164V72H138A22 22 0 0 1 138 116H112M112 116H144A24 24 0 0 1 144 164H112"/>
+        <circle class="lb-dot" cx="196" cy="44" r="10"/>
+      </svg>Leandro Butto</a>
     <ul>
       <li><a href="#sobre-mi">Sobre mí</a></li>
       <li><a href="#proyectos">Proyectos</a></li>
@@ -210,7 +259,8 @@ dialog .close{position:fixed;top:14px;right:18px;width:42px;height:42px;border-r
   <!-- ===== Encabezado ===== -->
   <header class="hero">
     <div class="wrap">
-      <p class="eyebrow">Hola, soy</p>
+      <div class="hero-text">
+      <p class="eyebrow prompt">$ whoami</p>
       <h1>Leandro Butto</h1>
       <p class="role">Desarrollador Backend Java</p>
       <ul class="titles">
@@ -233,6 +283,16 @@ dialog .close{position:fixed;top:14px;right:18px;width:42px;height:42px;border-r
         <span><span class="dot" aria-hidden="true"></span>Disponible para entrevistas</span>
         <span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg>Santa Fe, Argentina · Trabajo remoto</span>
+      </div>
+      </div>
+      <div class="hero-logo" aria-hidden="true">
+        <svg class="lb" viewBox="0 0 240 240">
+          <path class="lb-frame" pathLength="1" d="M150 20H68A48 48 0 0 0 20 68V172A48 48 0 0 0 68 220H172A48 48 0 0 0 220 172V100"/>
+          <path class="lb-l" pathLength="1" d="M70 72V164H112"/>
+          <path class="lb-b" pathLength="1" d="M112 164V72H138A22 22 0 0 1 138 116H112M112 116H144A24 24 0 0 1 144 164H112"/>
+          <circle class="lb-dot" cx="196" cy="44" r="10"/>
+        </svg>
+        <p class="lb-name">Leandro Butto</p>
       </div>
     </div>
   </header>
@@ -490,9 +550,8 @@ dialog .close{position:fixed;top:14px;right:18px;width:42px;height:42px;border-r
 
 <script>
 const root = document.documentElement, themeBtn = document.querySelector(".theme-toggle");
-const systemDark = matchMedia("(prefers-color-scheme: dark)");
 function syncThemeButton() {
-  const dark = root.dataset.theme ? root.dataset.theme === "dark" : systemDark.matches;
+  const dark = root.dataset.theme === "dark";
   root.classList.toggle("is-dark", dark);
   themeBtn.setAttribute("aria-label", dark ? "Cambiar a modo claro" : "Cambiar a modo oscuro");
 }
@@ -501,7 +560,6 @@ themeBtn.addEventListener("click", () => {
   try { localStorage.setItem("theme", root.dataset.theme); } catch {}
   syncThemeButton();
 });
-systemDark.addEventListener("change", syncThemeButton);
 syncThemeButton();
 
 const box = document.getElementById("lightbox");
