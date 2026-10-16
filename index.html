@@ -321,7 +321,7 @@ dialog .close{position:fixed;top:14px;right:18px;width:42px;height:42px;border-r
       <p class="lead" data-i18n="lead">Desarrollo aplicaciones web completas con <strong>Java, Spring Boot, React y PostgreSQL</strong>: desde el diseño de la base de datos y la seguridad, hasta la interfaz y la puesta en producción. Hoy tengo una app de finanzas personales en producción, una tienda online y un sistema de gestión para consultorios odontológicos.</p>
       <div class="ctas">
         <a class="btn primary" href="#proyectos">Ver proyectos</a>
-        <a class="btn ghost" href="cv-leandro-butto.pdf" download>
+        <a class="btn ghost" href="cv-leandro-butto.pdf" data-href-en="cv-leandro-butto-en.pdf" download>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 21h16"/></svg>Descargar CV</a>
         <a class="btn ghost" href="mailto:leandrobutto@gmail.com">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>Escribirme</a>
@@ -657,7 +657,7 @@ const EN = {
   "Cambiar a modo claro": "Switch to light mode", "Cambiar a modo oscuro": "Switch to dark mode",
   "Desarrollador Full Stack Java": "Java Full Stack Developer",
   "Analista en Sistemas": "Systems Analyst", "Licenciado en Informática": "Bachelor's in Computer Science",
-  "Ver proyectos": "See projects", "Descargar CV": "Download CV (Spanish)", "Escribirme": "Email me",
+  "Ver proyectos": "See projects", "Descargar CV": "Download CV", "Escribirme": "Email me",
   "Disponible para entrevistas": "Open to interviews", "Santa Fe, Argentina · Trabajo remoto": "Santa Fe, Argentina · Remote",
   "Rol buscado": "Target role", "Desarrollador Full Stack Java · Remoto": "Java Full Stack Developer · Remote",
   "Especialidad": "Specialty", "Títulos": "Degrees", "Ubicación": "Location", "Idiomas": "Languages",
@@ -804,6 +804,11 @@ function setLang(next) {
   for (const attr of ["aria-label", "alt", "data-cap", "placeholder"]) {
     document.querySelectorAll(`[${attr}]`).forEach(el => el.setAttribute(attr, t(el.getAttribute(attr))));
   }
+  // Links con versión en inglés (el CV): guardan su href en español la primera vez.
+  document.querySelectorAll("[data-href-en]").forEach(a => {
+    a.dataset.hrefEs ??= a.getAttribute("href");
+    a.setAttribute("href", next === "en" ? a.dataset.hrefEn : a.dataset.hrefEs);
+  });
   document.querySelectorAll(".lang-switch button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === next)));
 }
 document.querySelectorAll(".lang-switch button").forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang)));
