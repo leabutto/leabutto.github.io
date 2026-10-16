@@ -172,6 +172,35 @@ section{padding:56px 0}
 
 /* Skills */
 .skills{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.skill.wide{grid-column:1/-1}
+
+/* Experiencia */
+.job{padding:1.8rem}
+.job-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.8rem 1.5rem;margin-bottom:1.3rem}
+.job h3{font-size:1.3rem}
+.job-meta{margin:.25rem 0 0;color:var(--muted)}
+.job-date{align-self:flex-start;font:700 .8rem var(--mono);color:var(--accent);background:var(--accent-soft);padding:.35rem .75rem;border-radius:6px;white-space:nowrap}
+
+/* Arquitectura de ComoVivo */
+.arch{padding:1.8rem;border-top:1px solid var(--line)}
+.arch-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:.4rem}
+.arch-node{display:grid;gap:.3rem;align-content:start;padding:1rem 1.1rem;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
+.arch-tag{font:700 .7rem var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--logo-b)}
+.arch-node b{font-family:var(--mono);color:var(--ink)}
+.arch-node small{font-size:.85rem;line-height:1.45;color:var(--muted)}
+.arch-link{position:relative;display:grid;place-items:center;min-width:120px;text-align:center}
+.arch-link::before{content:"";position:absolute;left:4px;right:10px;top:50%;border-top:2px dashed var(--accent)}
+.arch-link::after{content:"";position:absolute;right:2px;top:50%;transform:translateY(-50%);border:6px solid transparent;border-left:9px solid var(--accent);border-right:0}
+.arch-link span{position:absolute;left:0;right:0;bottom:calc(50% + 6px);font:400 .72rem/1.45 var(--mono);color:var(--muted)}
+.arch-note{margin:1rem 0 0;font-size:.9rem;color:var(--muted)}
+@media (max-width:860px){
+  .arch{padding:1.4rem}
+  .arch-flow{grid-template-columns:1fr}
+  .arch-link{min-height:64px}
+  .arch-link span{position:relative;inset:auto;padding:.2rem .45rem;background:var(--surface)}
+  .arch-link::before{left:50%;right:auto;top:2px;bottom:12px;border-top:0;border-left:2px dashed var(--accent)}
+  .arch-link::after{left:50%;right:auto;top:auto;bottom:2px;transform:translateX(-50%);border:6px solid transparent;border-top:9px solid var(--accent);border-bottom:0}
+}
 @media (max-width:860px){.skills{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:560px){.skills{grid-template-columns:1fr}}
 .skill{padding:1.3rem 1.4rem}
@@ -252,6 +281,7 @@ dialog .close{position:fixed;top:14px;right:18px;width:42px;height:42px;border-r
       </svg>Leandro Butto</a>
     <ul>
       <li><a href="#sobre-mi">Sobre mí</a></li>
+      <li><a href="#experiencia">Experiencia</a></li>
       <li><a href="#proyectos">Proyectos</a></li>
       <li><a href="#tecnologias">Tecnologías</a></li>
       <li><a href="#formacion">Formación</a></li>
@@ -327,12 +357,13 @@ dialog .close{position:fixed;top:14px;right:18px;width:42px;height:42px;border-r
       </div>
       <div class="about">
         <div>
-          <p data-i18n="about1">Soy <strong>Analista en Sistemas</strong> y <strong>Licenciado en Informática</strong>. Me dedico al desarrollo full stack: backend con Java y Spring, frontend con React y la puesta en producción. Trabajo como freelance construyendo sistemas a medida para clientes reales.</p>
+          <p data-i18n="about1">Soy <strong>Analista en Sistemas</strong> y <strong>Licenciado en Informática</strong>. Me dedico al desarrollo full stack: backend con Java y Spring, frontend con React y la puesta en producción. Hace 3 años trabajo como freelance construyendo sistemas a medida para clientes reales.</p>
           <p data-i18n="about2">Me gusta partir de un problema concreto: una emprendedora que necesita vender online sin depender de un programador, o un consultorio que todavía lleva las fichas en papel. A partir de ahí diseño el modelo de datos, la seguridad, las reglas de negocio y la interfaz.</p>
           <p data-i18n="about3">Busco un puesto <strong>remoto</strong> como <strong>desarrollador full stack o backend Java</strong>, en un equipo donde pueda aportar en APIs REST, frontend, seguridad y bases de datos, y seguir aprendiendo.</p>
         </div>
         <div class="card facts">
           <dl>
+            <div><dt>Experiencia</dt><dd>3 años como freelance</dd></div>
             <div><dt>Rol buscado</dt><dd>Desarrollador Full Stack Java · Remoto</dd></div>
             <div><dt>Especialidad</dt><dd>Spring Boot · React · PostgreSQL · Docker</dd></div>
             <div><dt>Títulos</dt><dd>Analista en Sistemas<br>Licenciado en Informática</dd></div>
@@ -344,11 +375,36 @@ dialog .close{position:fixed;top:14px;right:18px;width:42px;height:42px;border-r
     </div>
   </section>
 
+  <!-- ===== Experiencia ===== -->
+  <section id="experiencia">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">02 · Experiencia</p>
+        <h2>Experiencia</h2>
+      </div>
+      <article class="card job">
+        <div class="job-head">
+          <div>
+            <h3>Desarrollador Full Stack Freelance</h3>
+            <p class="job-meta">Independiente · Remoto</p>
+          </div>
+          <span class="job-date">2023 – hoy · 3 años</span>
+        </div>
+        <ul class="features">
+          <li><b>Sistemas web a medida:</b> a partir de la necesidad de cada cliente diseño el modelo de datos y desarrollo el backend, el frontend y el despliegue.</li>
+          <li><b>Hola Pacha:</b> tienda online con pagos por Mercado Pago, cotización de envíos y panel de administración para una emprendedora.</li>
+          <li><b>Consultorio Odontológico:</b> sistema de gestión multi-consultorio, migrado de Servlets/JSP a Spring Boot y preparado para producción con Docker.</li>
+          <li><b>ComoVivo, producto propio:</b> app de finanzas personales en producción en comovivo.app, con dominio propio, mails transaccionales y 76 tests automáticos.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
   <!-- ===== Proyectos ===== -->
   <section id="proyectos">
     <div class="wrap">
       <div class="sec-head">
-        <p class="eyebrow">02 · Proyectos</p>
+        <p class="eyebrow">03 · Proyectos</p>
         <h2>Lo que construí</h2>
         <p>Tres aplicaciones completas, con backend, base de datos, seguridad e interfaz. Tocá las capturas para verlas en grande.</p>
       </div>
@@ -366,7 +422,7 @@ dialog .close{position:fixed;top:14px;right:18px;width:42px;height:42px;border-r
             <p class="problem">App para ordenar la plata del mes en Argentina, solo o de a dos: sueldos, gastos fijos, tarjetas con cuotas y ahorros. Responde lo que todos se preguntan a mitad de mes: cuánto me queda por día y quién le debe a quién.</p>
             <p class="label">Tecnologías</p>
             <ul class="chips">
-              <li>Java 17</li><li>Spring Boot 4</li><li>Spring Security + JWT</li><li>Spring Data JPA</li><li>PostgreSQL</li><li>Flyway</li><li>API REST</li><li>React 19</li><li>TypeScript</li><li>Vite</li><li>Tailwind CSS</li><li>TanStack Query</li><li>PWA</li><li>Docker</li><li>Render + Neon</li>
+              <li>Java 17</li><li>Spring Boot 4</li><li>Spring Security + JWT</li><li>Spring Data JPA</li><li>PostgreSQL</li><li>Flyway</li><li>API REST</li><li>React 19</li><li>TypeScript</li><li>Vite</li><li>Tailwind CSS</li><li>TanStack Query</li><li>PWA</li><li>JUnit 5 + Mockito</li><li>Vitest</li><li>Docker</li><li>Render + Neon</li>
             </ul>
             <div class="links">
               <a class="btn primary" href="https://comovivo.app" target="_blank" rel="noopener">
@@ -385,7 +441,7 @@ dialog .close{position:fixed;top:14px;right:18px;width:42px;height:42px;border-r
               <li><b>Ahorros y metas</b> en pesos y dólares, con cotización del día y cuánto poner por mes para llegar.</li>
               <li><b>Se instala en el celular (PWA)</b> y deja cargar gastos sin señal: se suben solos al volver la conexión, sin duplicarse.</li>
               <li><b>Seguridad:</b> registro con email confirmado, JWT con refresh tokens rotativos y privacidad de los gastos personales dentro de la pareja.</li>
-              <li><b>En producción</b> con Docker en Render y PostgreSQL en Neon; 76 tests automáticos de backend y frontend.</li>
+              <li><b>En producción</b> con Docker en Render y PostgreSQL en Neon; 76 tests automáticos con JUnit 5, Mockito y Vitest.</li>
             </ul>
           </div>
           <div class="thumbs phone">
@@ -394,6 +450,17 @@ dialog .close{position:fixed;top:14px;right:18px;width:42px;height:42px;border-r
             <button data-img="img/comovivo-ahorros.jpeg" data-cap="ComoVivo · Ahorros y metas de a dos" aria-label="Ampliar ahorros y metas"><img src="img/comovivo-ahorros.jpeg" alt="Ahorros con una meta de vacaciones al 36%"></button>
             <p class="cap">Ingreso · Inicio · Ahorros y metas (datos de ejemplo)</p>
           </div>
+        </div>
+        <div class="arch">
+          <p class="label">Cómo está armado</p>
+          <div class="arch-flow">
+            <div class="arch-node"><span class="arch-tag">Cliente</span><b>React + TypeScript</b><small>PWA instalable · cola sin conexión · TanStack Query</small></div>
+            <div class="arch-link"><span>HTTPS · JSON<br>JWT + refresh</span></div>
+            <div class="arch-node"><span class="arch-tag">API</span><b>Spring Boot 4</b><small>Spring Security · validación · Spring Data JPA</small></div>
+            <div class="arch-link"><span>JPA · Flyway</span></div>
+            <div class="arch-node"><span class="arch-tag">Datos</span><b>PostgreSQL</b><small>Neon · migraciones versionadas</small></div>
+          </div>
+          <p class="arch-note">Frontend y API viajan en una sola imagen Docker desplegada en Render; cada push a main se publica solo. Los mails salen por Brevo y las cotizaciones del dólar vienen de dolarapi.com.</p>
         </div>
       </article>
 
@@ -485,7 +552,7 @@ dialog .close{position:fixed;top:14px;right:18px;width:42px;height:42px;border-r
   <section id="tecnologias">
     <div class="wrap">
       <div class="sec-head">
-        <p class="eyebrow">03 · Tecnologías</p>
+        <p class="eyebrow">04 · Tecnologías</p>
         <h2>Con qué trabajo</h2>
       </div>
       <div class="skills">
@@ -510,6 +577,10 @@ dialog .close{position:fixed;top:14px;right:18px;width:42px;height:42px;border-r
           <ul><li>Docker</li><li>Docker Compose</li><li>Render</li><li>Neon</li><li>GitHub Pages</li><li>Dominios y DNS (Cloudflare)</li></ul>
         </div>
         <div class="card skill">
+          <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 3h6M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21.5h11.6a2 2 0 0 0 1.7-3L14 9V3"/><path d="M7.5 15h9"/></svg>Testing</h3>
+          <ul><li>JUnit 5</li><li>Mockito</li><li>Spring Boot Test</li><li>PostgreSQL embebido</li><li>Vitest</li><li>Testing Library</li></ul>
+        </div>
+        <div class="card skill wide">
           <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4 2.5-2.5Z"/></svg>Herramientas</h3>
           <ul><li>Maven</li><li>Git y GitHub</li><li>Postman</li><li>IntelliJ IDEA</li><li>NetBeans</li></ul>
         </div>
@@ -521,7 +592,7 @@ dialog .close{position:fixed;top:14px;right:18px;width:42px;height:42px;border-r
   <section id="formacion">
     <div class="wrap">
       <div class="sec-head">
-        <p class="eyebrow">04 · Formación</p>
+        <p class="eyebrow">05 · Formación</p>
         <h2>Estudios</h2>
       </div>
       <div class="edu">
@@ -542,7 +613,7 @@ dialog .close{position:fixed;top:14px;right:18px;width:42px;height:42px;border-r
     <div class="wrap">
       <div class="card contact">
         <div class="contact-intro">
-          <p class="eyebrow">05 · Contacto</p>
+          <p class="eyebrow">06 · Contacto</p>
           <h2>¿Hablamos?</h2>
           <p>Estoy disponible para entrevistas. Dejame un mensaje acá o escribime directo; te respondo dentro de las 24 horas.</p>
           <ul class="contact-links">
@@ -591,7 +662,7 @@ const EN = {
   "Rol buscado": "Target role", "Desarrollador Full Stack Java · Remoto": "Java Full Stack Developer · Remote",
   "Especialidad": "Specialty", "Títulos": "Degrees", "Ubicación": "Location", "Idiomas": "Languages",
   "Español nativo · Inglés intermedio (B1)": "Spanish (native) · English (intermediate, B1)",
-  "02 · Proyectos": "02 · Projects", "Lo que construí": "What I've built",
+  "03 · Proyectos": "03 · Projects", "Lo que construí": "What I've built",
   "Tres aplicaciones completas, con backend, base de datos, seguridad e interfaz. Tocá las capturas para verlas en grande.": "Three complete applications, with backend, database, security and UI. Click the screenshots to enlarge them.",
   "● En producción": "● In production", "● En desarrollo": "● In development", "● Funcional · en evolución": "● Working · evolving",
   "Finanzas personales y de pareja · App web instalable": "Personal and couple finances · Installable web app",
@@ -612,7 +683,23 @@ const EN = {
   "Seguridad:": "Security:",
   "registro con email confirmado, JWT con refresh tokens rotativos y privacidad de los gastos personales dentro de la pareja.": "sign-up with email confirmation, JWT with rotating refresh tokens and privacy for personal expenses within a couple.",
   "En producción": "In production",
-  "con Docker en Render y PostgreSQL en Neon; 76 tests automáticos de backend y frontend.": "with Docker on Render and PostgreSQL on Neon; 76 automated backend and frontend tests.",
+  "con Docker en Render y PostgreSQL en Neon; 76 tests automáticos con JUnit 5, Mockito y Vitest.": "with Docker on Render and PostgreSQL on Neon; 76 automated tests with JUnit 5, Mockito and Vitest.",
+  "Experiencia": "Experience", "3 años como freelance": "3 years freelancing", "02 · Experiencia": "02 · Experience",
+  "Desarrollador Full Stack Freelance": "Freelance Full Stack Developer", "Independiente · Remoto": "Self-employed · Remote",
+  "2023 – hoy · 3 años": "2023 – present · 3 years",
+  "Sistemas web a medida:": "Custom web systems:",
+  "a partir de la necesidad de cada cliente diseño el modelo de datos y desarrollo el backend, el frontend y el despliegue.": "starting from each client's needs, I design the data model and build the backend, the frontend and the deployment.",
+  "tienda online con pagos por Mercado Pago, cotización de envíos y panel de administración para una emprendedora.": "an online store with Mercado Pago payments, shipping quotes and an admin panel for a small business owner.",
+  "Consultorio Odontológico:": "Dental Practice System:",
+  "sistema de gestión multi-consultorio, migrado de Servlets/JSP a Spring Boot y preparado para producción con Docker.": "a multi-practice management system, migrated from Servlets/JSP to Spring Boot and made production-ready with Docker.",
+  "ComoVivo, producto propio:": "ComoVivo, my own product:",
+  "app de finanzas personales en producción en comovivo.app, con dominio propio, mails transaccionales y 76 tests automáticos.": "a personal finance app live at comovivo.app, with its own domain, transactional emails and 76 automated tests.",
+  "PostgreSQL embebido": "Embedded PostgreSQL",
+  "Cómo está armado": "How it's built", "Cliente": "Client", "Datos": "Data",
+  "PWA instalable · cola sin conexión · TanStack Query": "Installable PWA · offline queue · TanStack Query",
+  "Spring Security · validación · Spring Data JPA": "Spring Security · validation · Spring Data JPA",
+  "Neon · migraciones versionadas": "Neon · versioned migrations",
+  "Frontend y API viajan en una sola imagen Docker desplegada en Render; cada push a main se publica solo. Los mails salen por Brevo y las cotizaciones del dólar vienen de dolarapi.com.": "Frontend and API ship in a single Docker image deployed on Render; every push to main deploys automatically. Emails go out through Brevo and dollar exchange rates come from dolarapi.com.",
   "Ingreso · Inicio · Ahorros y metas (datos de ejemplo)": "Login · Home · Savings and goals (sample data)",
   "Tienda online · Cliente real": "Online store · Real client",
   "E-commerce para un emprendimiento de decoración y accesorios hechos a mano. La dueña carga productos, arma ofertas y gestiona pedidos desde su celular, sin depender de un programador.": "E-commerce for a handmade decor and accessories business. The owner uploads products, creates offers and manages orders from her phone, without depending on a developer.",
@@ -642,15 +729,15 @@ const EN = {
   "Listo para producción:": "Production-ready:",
   "Docker Compose con PostgreSQL, HTTPS automático y backups diarios.": "Docker Compose with PostgreSQL, automatic HTTPS and daily backups.",
   "Ingreso · Ficha del paciente · Odontograma": "Login · Patient record · Dental chart",
-  "03 · Tecnologías": "03 · Tech stack", "Con qué trabajo": "What I work with",
+  "04 · Tecnologías": "04 · Tech stack", "Con qué trabajo": "What I work with",
   "Lenguajes": "Programming languages", "Bases de datos": "Databases", "Herramientas": "Tools",
   "Despliegue": "Deployment", "Dominios y DNS (Cloudflare)": "Domains & DNS (Cloudflare)",
   "HTML y CSS": "HTML & CSS", "APIs REST": "REST APIs", "API REST": "REST API", "Servlets y JSP": "Servlets & JSP",
   "Modelado relacional": "Relational modeling", "Flyway (migraciones)": "Flyway (migrations)", "Git y GitHub": "Git & GitHub",
-  "04 · Formación": "04 · Education", "Estudios": "Academic background",
+  "05 · Formación": "05 · Education", "Estudios": "Academic background",
   "Licenciatura en Informática": "Bachelor's Degree in Computer Science",
   "Analista Universitario en Sistemas": "University Degree in Systems Analysis",
-  "05 · Contacto": "05 · Contact", "¿Hablamos?": "Let's talk",
+  "06 · Contacto": "06 · Contact", "¿Hablamos?": "Let's talk",
   "Estoy disponible para entrevistas. Dejame un mensaje acá o escribime directo; te respondo dentro de las 24 horas.": "I'm open to interviews. Leave me a message here or email me directly; I'll reply within 24 hours.",
   "Nombre": "Name", "Mensaje": "Message", "Contame sobre el puesto o el proyecto": "Tell me about the role or the project",
   "Enviar mensaje": "Send message", "Enviando…": "Sending…",
@@ -686,7 +773,7 @@ const EN = {
 // Párrafos con negritas: se traducen enteros.
 const EN_HTML = {
   lead: "I build complete web applications with <strong>Java, Spring Boot, React and PostgreSQL</strong>: from database design and security to the UI and production deployment. Today I have a personal finance app in production, an online store and a management system for dental practices.",
-  about1: "I'm a <strong>Systems Analyst</strong> and hold a <strong>Bachelor's Degree in Computer Science</strong>. I work across the full stack: backend with Java and Spring, frontend with React, and deployment to production. I freelance, building custom systems for real clients.",
+  about1: "I'm a <strong>Systems Analyst</strong> and hold a <strong>Bachelor's Degree in Computer Science</strong>. I work across the full stack: backend with Java and Spring, frontend with React, and deployment to production. I have been freelancing for 3 years, building custom systems for real clients.",
   about2: "I like to start from a concrete problem: an entrepreneur who needs to sell online without depending on a developer, or a dental practice that still keeps patient records on paper. From there I design the data model, security, business rules and interface.",
   about3: "I'm looking for a <strong>remote</strong> position as a <strong>full stack or backend Java developer</strong>, on a team where I can contribute to REST APIs, frontend, security and databases, and keep learning.",
 };
